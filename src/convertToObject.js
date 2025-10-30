@@ -9,12 +9,14 @@ function convertToObject(sourceString) {
   return sourceString
     .split(';')
     .filter((decl) => decl.trim() !== '')
-    .reduce((obj, decl) => {
-      const [key, value] = decl.split(':');
+    .reduce((stylesObject, decl) => {
+      if (decl.includes(':')) {
+        const [key, value] = decl.split(':');
 
-      obj[key.trim()] = value.trim();
+        stylesObject[key.trim()] = value.trim();
+      }
 
-      return obj;
+      return stylesObject;
     }, {});
 }
 
